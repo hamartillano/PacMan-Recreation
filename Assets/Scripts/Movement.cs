@@ -10,6 +10,9 @@ public class Movement : MonoBehaviour
     private Vector3[] movePositions = new Vector3[4];
     private float moveSpeed = 1.0f; // Adjust this value to control the movement speed
     private float moveTimer = 0.0f;
+    private float delayBeforeMovement = 4f; // Time delay before starting movement
+
+    private bool isMoving = false;
 
     void Start()
     {
@@ -19,11 +22,23 @@ public class Movement : MonoBehaviour
         movePositions[3] = new Vector3(-12.47f, 9.68f, 0f);
 
         transformArray[0].position = movePositions[0];
+
+        // Start the timer for the initial delay
+        StartCoroutine(StartMovementDelay());
     }
 
     void Update()
     {
-        MoveObjects();
+        if (isMoving)
+        {
+            MoveObjects();
+        }
+    }
+
+    private IEnumerator StartMovementDelay()
+    {
+        yield return new WaitForSeconds(delayBeforeMovement);
+        isMoving = true;
     }
 
     private void MoveObjects()
