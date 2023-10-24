@@ -21,4 +21,9 @@ public class UIManager : MonoBehaviour
     {
         SceneManager.LoadScene("PacMan");
     }
+
+    public void OnClickExit()
+    {
+        SceneManager.LoadScene("StartScene");
+    }
 }
